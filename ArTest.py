@@ -15,4 +15,5 @@ interest_rate = st.number_input("Ставка кредита (в %)", min_value=
 loan_term_years = st.number_input("Срок кредита (в годах)", min_value=1, value=20, step=1)
 
 # Ввод типа ежемесячных платежей
-payment_type = st.checkbox("Тип ежемесячных платежей", ["Аннуитетные", "Дифференцированные"])
+payment_type = st.radio("Тип ежемесячных платежей", ["Аннуитетные", "Дифференцированные"])
+
