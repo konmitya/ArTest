@@ -32,7 +32,10 @@ if payment_type == "Дифференцированные":
         rest = rest - mp_real
         mp_cnt = mp_cnt - 1
 
+    sum = round(sum(arr)+down_payment, 2) # общая заплаченная сумма
+    proc = round(sum(arr), 2) - rest_start
     st.write (arr)
+    st.write(f'Общая стоимость квартиры: {sum}. Сумма процентов составляет {proc}')
 
 else:
     f = 7
