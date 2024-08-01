@@ -32,10 +32,18 @@ if payment_type == "Дифференцированные":
         rest = rest - mp_real
         mp_cnt = mp_cnt - 1
 
-    suma = round(sum(arr)+down_payment, 2) # общая заплаченная сумма
+    suma = round(sum(arr) + down_payment, 2) # общая заплаченная сумма
     proc = round(sum(arr), 2) - rest_start
     st.write (arr)
-    st.write(f'Общая стоимость квартиры: {suma}. Сумма процентов составляет {proc}')
+    st.write(f'Общая стоимость квартиры: {suma}. Сумма процентов: {proc}')
 
 else:
-    f = 7
+    mp_cnt = loan_term_years * 12
+    r = interest_rate / 1200.0
+    ak = (r * (1 + r) ** mp_cnt) / (((1 + r) ** mp_cnt) - 1)
+    mp = rest_start * ak
+    total = mp * mp_cnt
+    suma = round(total+down_payment, 2)
+    proc = total - rest_start
+
+    st.write(f'Ежемесячный платеж составит: {round(mp, 2)}. Общая стоимость квартиры: {suma}. Сумма процентов: {proc}'
