@@ -2,6 +2,10 @@ import streamlit as st
 
 st.title("Ипотечный калькулятор")
 
+def format_number(number):
+    return f"{number:,.0f}".replace(",", " ")
+
+
 # Ввод стоимости квартиры
 property_value = st.number_input("Стоимость квартиры (в рублях)", min_value=0, value=1000000, step=10000, format="%0.1f")
 
@@ -46,6 +50,6 @@ else:
     suma = round(total+down_payment, 2)
     proc = round(total - rest_start, 2)
 
-    st.write(f'Ежемесячный платеж составит: {round(mp, 2)}.')
+    st.write(f'Ежемесячный платеж составит: {format_number(round(mp, 2))}.')
     st.write(f'Общая стоимость квартиры: {suma}.')
     st.write(f'Сумма процентов: {proc}')
