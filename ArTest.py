@@ -5,7 +5,7 @@ import sqlite3
 # Подключение к базе данных SQLite
 conn = sqlite3.connect('articuls.db')
 c = conn.cursor()
-
+ #ffas
 # Создание таблицы, если ее еще нет
 c.execute('''
 CREATE TABLE IF NOT EXISTS articuls (
