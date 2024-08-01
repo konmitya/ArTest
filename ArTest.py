@@ -7,7 +7,7 @@ def format_number(number):
 
 
 # Ввод стоимости квартиры
-property_value = st.number_input("Стоимость квартиры (в рублях)", min_value=0, value=1000000, step=10000, format="%0.1f")
+property_value = st.number_input("Стоимость квартиры (в рублях)", min_value=0, value=1000000, step=10000)
 
 # Ввод первоначального взноса
 down_payment = st.number_input("Первоначальный взнос (в рублях)", min_value=0, value=200000, step=10000)
@@ -51,5 +51,5 @@ else:
     proc = round(total - rest_start, 2)
 
     st.write(f'Ежемесячный платеж составит: {format_number(round(mp, 2))}.')
-    st.write(f'Общая стоимость квартиры: {suma}.')
-    st.write(f'Сумма процентов: {proc}')
+    st.write(f'Общая стоимость квартиры: {format_number(suma)}.')
+    st.write(f'Сумма процентов: {format_number(proc)}')
