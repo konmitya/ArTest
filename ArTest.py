@@ -38,8 +38,11 @@ if payment_type == "Дифференцированные":
 
     suma = round(sum(arr) + down_payment, 2) # общая заплаченная сумма
     proc = round(sum(arr), 2) - rest_start
+
+    st.write ('Ежемесячные платежи:')
     st.write (arr)
-    st.write(f'Общая стоимость квартиры: {suma}. Сумма процентов: {proc}')
+    st.write(f'Общая стоимость квартиры: {format_number(suma)}.')
+    st.write(f'Сумма процентов: {format_number(proc)}.')
 
 else:
     mp_cnt = loan_term_years * 12
@@ -52,4 +55,4 @@ else:
 
     st.write(f'Ежемесячный платеж составит: {format_number(round(mp, 2))}.')
     st.write(f'Общая стоимость квартиры: {format_number(suma)}.')
-    st.write(f'Сумма процентов: {format_number(proc)}')
+    st.write(f'Сумма процентов: {format_number(proc)}.')
