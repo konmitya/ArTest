@@ -17,3 +17,22 @@ loan_term_years = st.number_input("Срок кредита (в годах)", min
 # Ввод типа ежемесячных платежей
 payment_type = st.radio("Тип ежемесячных платежей", ["Аннуитетные", "Дифференцированные"])
 
+rest_start = property_value - down_payment
+
+# Расчет дифференцированных платежей
+if payment_type == "Дифференцированные":
+    arr = [] # пустой массив для наполнения месячными платежами
+    mp_cnt = loan_term_years * 12 # количество месяцев в сроке кредита
+    rest = rest_start
+    mp_real = rest_start / (loan_term_years * 12.0)
+
+    while mp_cnt != 0:
+        mp = mp_real + (rest * interest_rate / 1200)
+        arr.append(round(mp, 2))
+        rest = rest - mp_real
+        mp_cnt = mp_cnt - 1
+
+    st.write (arr)
+
+else:
+    f = 7
