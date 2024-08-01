@@ -46,4 +46,4 @@ else:
     suma = round(total+down_payment, 2)
     proc = total - rest_start
 
-    st.write(f'Ежемесячный платеж составит: {round(mp, 2)}. Общая стоимость квартиры: {suma}. Сумма процентов: {proc}'
+    st.write(f'Ежемесячный платеж составит: {round(mp, 2)}. Общая стоимость квартиры: {suma}. Сумма процентов: {proc}')
