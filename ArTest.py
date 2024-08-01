@@ -3,7 +3,7 @@ import streamlit as st
 st.title("Ипотечный калькулятор")
 
 # Ввод стоимости квартиры
-property_value = st.number_input("Стоимость квартиры (в рублях)", min_value=0, value=1000000, step=10000, format="%d")
+property_value = st.number_input("Стоимость квартиры (в рублях)", min_value=0, value=1000000, step=10000, format=".2f")
 
 # Ввод первоначального взноса
 down_payment = st.number_input("Первоначальный взнос (в рублях)", min_value=0, value=200000, step=10000)
