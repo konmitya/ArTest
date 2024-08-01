@@ -3,7 +3,7 @@ import streamlit as st
 st.title("Ипотечный калькулятор")
 
 # Ввод стоимости квартиры
-property_value = st.number_input("Стоимость квартиры (в рублях)", min_value=0, value=1000000, step=10000)
+property_value = st.number_input("Стоимость квартиры (в рублях)", min_value=0, value=1000000, step=10000, format="%d")
 
 # Ввод первоначального взноса
 down_payment = st.number_input("Первоначальный взнос (в рублях)", min_value=0, value=200000, step=10000)
@@ -44,6 +44,8 @@ else:
     mp = rest_start * ak
     total = mp * mp_cnt
     suma = round(total+down_payment, 2)
-    proc = total - rest_start
+    proc = round(total - rest_start, 2)
 
-    st.write(f'Ежемесячный платеж составит: {round(mp, 2)}. Общая стоимость квартиры: {suma}. Сумма процентов: {proc}')
+    st.write(f'Ежемесячный платеж составит: {round(mp, 2)}.')
+    st.write(f'Общая стоимость квартиры: {suma}.')
+    st.write(f'Сумма процентов: {proc}')
