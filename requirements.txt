@@ -1,2 +1,5 @@
 streamlit
-
+pandas
+Python-IO
+xlrd
+openpyxl
