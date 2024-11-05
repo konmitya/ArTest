@@ -1,6 +1,14 @@
 import streamlit as st
 import pandas as pd
 from io import BytesIO
+import string
+
+def excel_column_to_index(column_name):
+    index = 0
+    for char in column_name:
+        index = index * 26 + (ord(char.upper()) - ord('A') + 1)
+    return index - 1
+
 
 st.header("Страница 2: Сопоставление данных между листами Excel")
 
@@ -12,16 +20,27 @@ if uploaded_file:
     sheet1 = pd.read_excel(uploaded_file, sheet_name="Лист1")
     sheet2 = pd.read_excel(uploaded_file, sheet_name="Лист2", header=None)
 
-    # Отображаем список колонок для выбора в "Лист2"
-    columns = sheet2.columns
-    selected_match_column = st.selectbox("Выберите колонку на 'Лист2' для поиска модели", columns)
-    selected_columns_range = st.multiselect("Выберите колонки для переноса данных с 'Лист2'", columns,
-                                            default=columns[1:7])
+    # Ввод колонки для поиска модели на "Лист2"
+    match_column_letter = st.text_input(
+        "Введите букву колонки для поиска модели на 'Лист2' (например, A)").strip().upper()
+
+    # Ввод колонок для переноса данных в формате Excel (например, "B, C, D")
+    columns_range_input = st.text_input(
+        "Введите буквы колонок для переноса данных с 'Лист2', разделенные запятыми (например, B, C, D)").strip().upper()
+    columns_range_letters = [col.strip() for col in columns_range_input.split(",") if col.strip()]
+
+    # Ввод количества строк для переноса
     rows_to_transfer = st.number_input("Введите количество строк для переноса", min_value=1, max_value=100, value=16)
 
+    # Конвертируем буквы колонок в индексы
+    try:
+        match_column_index = excel_column_to_index(match_column_letter)
+        selected_columns_indices = [excel_column_to_index(col) for col in columns_range_letters]
+    except:
+        st.error("Некорректное указание колонок. Проверьте правильность ввода.")
+
     # Создаем DataFrame для результата
-    result_df = pd.DataFrame(columns=sheet1.columns.tolist() + list(
-        range(len(sheet1.columns), len(sheet1.columns) + len(selected_columns_range))))
+    result_df = pd.DataFrame(columns=sheet1.columns.tolist() + columns_range_letters)
 
     if st.button("Выполнить обработку"):
         # Обрабатываем каждую строку из "Лист1"
@@ -30,16 +49,16 @@ if uploaded_file:
             модель = row[1]
 
             # Находим соответствие модели на "Лист2"
-            model_rows = sheet2[sheet2[selected_match_column] == модель]
+            model_rows = sheet2[sheet2[match_column_index] == модель]
 
             if not model_rows.empty:
                 # Получаем таблицу напротив найденного названия модели
                 start_row = model_rows.index[0] + 1
                 end_row = start_row + rows_to_transfer
-                таблица = sheet2.iloc[start_row:end_row, selected_columns_range]
+                таблица = sheet2.iloc[start_row:end_row, selected_columns_indices]
 
                 # Записываем текущую строку из Лист1 и добавляем таблицу
-                result_df = pd.concat([result_df, pd.DataFrame([row.tolist() + [""] * len(selected_columns_range)],
+                result_df = pd.concat([result_df, pd.DataFrame([row.tolist() + [""] * len(columns_range_letters)],
                                                                columns=result_df.columns)])
                 таблица.columns = result_df.columns[len(sheet1.columns):]  # Переименовываем колонки для вставки
                 result_df = pd.concat([result_df, таблица], ignore_index=True)
