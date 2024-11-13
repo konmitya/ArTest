@@ -3,3 +3,13 @@ pandas
 Python-IO
 xlrd
 openpyxl
+numpy
+matplotlib
+scipy
+plotly
+kaleido
+Pillow
+streamlit-extras
+streamlit-analytics
+docx
+st-pages==0.5.0
