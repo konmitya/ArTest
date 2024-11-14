@@ -113,8 +113,8 @@ if uploaded_file is not None:
     st.title("Шаг 3. Построение измененного графика")
 
     # Поля для ввода базовой и новой частоты вращения насоса
-    n = st.number_input("Введите базовую частоту вращения насоса (n) в об/мин", min_value=0, step=1)
-    n1 = st.number_input("Введите новую частоту вращения насоса (n1) в об/мин", min_value=0, step=1)
+    n = st.number_input("Введите базовую частоту вращения насоса (n) в об/мин", min_value=0, step=1, value=2900)
+    n1 = st.number_input("Введите новую частоту вращения насоса (n1) в об/мин", min_value=0, step=1, value=2600)
 
     if n > 0:
         # Рассчитываем коэффициент преобразования
@@ -140,32 +140,33 @@ if uploaded_file is not None:
         st.write("Q и H")
         st.dataframe(df1[['Q', 'H']])
     with col2:
+        st.write("Формулы для преобразования")
         image = Image.open(f'1.png')
         st.image(image)
     with col3:
         st.write("Q_new и H_new")
         st.dataframe(df1[['Q_new', 'H_new']])
 
-    # 2. Вторая строка с Q и EFF в первом и Q_new и EFF в третьем столбце
-    st.write("### Ряд 2: Q и EFF в первом столбце, Q_new и EFF в третьем")
+
     col1, col2, col3 = st.columns(3)
     with col1:
         st.write("Q и EFF")
         st.dataframe(df1[['Q', 'EFF']])
     with col2:
+        st.write("Формулы для преобразования")
         image2 = Image.open(f'2.png')
         st.image(image2)
     with col3:
         st.write("Q_new и EFF")
         st.dataframe(df1[['Q_new', 'EFF']])
 
-    # 3. Третья строка с Q и power в первом и Q_new и power_new в третьем столбце
-    st.write("### Ряд 3: Q и power в первом столбце, Q_new и power_new в третьем")
+
     col1, col2, col3 = st.columns(3)
     with col1:
         st.write("Q и power")
         st.dataframe(df1[['Q', 'power']])
     with col2:
+        st.write("Формулы для преобразования")
         image3 = Image.open(f'3.png')
         st.image(image3)
     with col3:
