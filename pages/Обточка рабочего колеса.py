@@ -130,7 +130,7 @@ if uploaded_file is not None:
         # Добавляем новые колонки с преобразованными значениями
         df1['Q_new'] = df1['Q'] * ratio
         df1['H_new'] = df1['H'] * (ratio ** 2)
-        df1['power_new'] = df1['power'] * (ratio ** 5)
+        df1['power_new'] = df1['power'] * (ratio ** 3)
 
         # Присваиваем индексы для наглядности
         df1.index = range(1, len(df1) + 1)
