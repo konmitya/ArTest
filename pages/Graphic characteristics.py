@@ -62,15 +62,19 @@ if uploaded_file:
             font=dict(size=24),
         ),
         xaxis=dict(
-            title="Расход, м³/ч",
-            titlefont=dict(size=18),
+            title=dict(
+                text="Расход, м³/ч",
+                font=dict(size=18)
+            ),
             tickfont=dict(size=14),
             showgrid=True,
             gridcolor="#eeeeee"
         ),
         yaxis=dict(
-            title="Напор, м",
-            titlefont=dict(size=18),
+            title=dict(
+                text="Напор, м",
+                font=dict(size=18)
+            ),
             tickfont=dict(size=14),
             showgrid=True,
             gridcolor="#eeeeee"
