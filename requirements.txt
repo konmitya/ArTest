@@ -1,6 +1,5 @@
 streamlit
 pandas
-Python-IO
 xlrd
 openpyxl
 numpy
@@ -11,5 +10,6 @@ kaleido
 Pillow
 streamlit-extras
 streamlit-analytics
-docx
+python-docx
 st-pages==0.5.0
+openai
